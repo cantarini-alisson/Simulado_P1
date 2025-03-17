@@ -45,11 +45,13 @@ public class Compra implements Iterable<ItemCompra> {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("Compra de " + cliente.getNome() + "\n");
+        String resultado = "Compra de " + cliente.getNome() + "\n";
+
         for (ItemCompra item : itens) {
-            sb.append(item).append("\n");
+            resultado += item + "\n";
         }
-        sb.append("Total a pagar: R$ ").append(valorPagar);
-        return sb.toString();
+
+        resultado += "Total a pagar: R$ " + valorPagar;
+        return resultado;
     }
 }
