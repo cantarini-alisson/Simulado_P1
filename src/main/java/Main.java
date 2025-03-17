@@ -6,10 +6,12 @@ public class Main {
             Produto geladeira = new Produto("Geladeira (110v)", 3000.00, 2);
 
             Cliente maria = new Cliente("Maria");
+
             Compra compra = new Compra(maria);
             compra.adicionarItem(panela, 2);
             compra.adicionarItem(jogoDeCama, 1);
             compra.adicionarItem(geladeira, 1);
+
             maria.realizarCompra(compra);
 
             System.out.println("Total a pagar: R$ " + compra.getValorPagar());
