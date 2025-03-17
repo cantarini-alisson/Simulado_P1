@@ -13,7 +13,7 @@ public class ItemCompra {
         this.produto = produto;
         this.quantidade = quantidade;
         this.valorTotal = produto.getPrecoUnitario() * quantidade;
-        produto.reduzirEstoque(quantidade); // Reduz o estoque do produto
+        produto.reduzirEstoque(quantidade);
     }
 
     public double getValorTotal() {
