@@ -1,28 +1,27 @@
-import java.util.HashMap;
-import java.util.Map;
-
 public class Main {
     public static void main(String[] args) {
-        try {
-            Map<String, Produto> produtos = new HashMap<>();
-            produtos.put("Panela", new Produto("Panela", 50.00, 10));
-            produtos.put("Jogo de cama", new Produto("Jogo de cama", 150.00, 5));
-            produtos.put("Geladeira", new Produto("Geladeira (110v)", 3000.00, 2));
+        Produto panela = new Produto("Panela", 50.0, 10);
+        Produto jogoDeCama = new Produto("Jogo de Cama", 150.0, 5);
+        Produto geladeira = new Produto("Geladeira", 3000.0, 2);
 
-            Cliente maria = new Cliente("Maria");
-            Compra compra = new Compra(maria);
+        Cliente maria = new Cliente("Maria");
 
-            compra.adicionarItem(produtos.get("Panela"), 2);
-            compra.adicionarItem(produtos.get("Jogo de cama"), 1);
-            compra.adicionarItem(produtos.get("Geladeira"), 1);
+        Compra compra1 = new Compra();
+        compra1.adicionarItem(panela, 2);
+        compra1.adicionarItem(jogoDeCama, 1);
 
-            maria.realizarCompra(compra);
+        maria.adicionarCompra(compra1);
 
-            System.out.println("Total a pagar: R$ " + compra.getValorPagar());
-            maria.exibirHistoricoCompras();
+        Compra compra2 = new Compra();
+        compra2.adicionarItem(geladeira, 1);
 
-        } catch (IllegalArgumentException | IllegalStateException e) {
-            System.out.println("Erro: " + e.getMessage());
-        }
+        maria.adicionarCompra(compra2);
+
+        maria.exibirHistorico();
+
+        System.out.println("\nEstoque atual:");
+        System.out.println(panela);
+        System.out.println(jogoDeCama);
+        System.out.println(geladeira);
     }
 }

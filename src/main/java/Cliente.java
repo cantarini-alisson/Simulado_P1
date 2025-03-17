@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class Cliente {
@@ -7,9 +6,6 @@ public class Cliente {
     private List<Compra> historicoCompras;
 
     public Cliente(String nome) {
-        if (nome == null || nome.trim().isEmpty()) {
-            throw new IllegalArgumentException("O nome do cliente não pode ser vazio.");
-        }
         this.nome = nome;
         this.historicoCompras = new ArrayList<>();
     }
@@ -18,26 +14,14 @@ public class Cliente {
         return nome;
     }
 
-    public void realizarCompra(Compra compra) {
+    public void adicionarCompra(Compra compra) {
         historicoCompras.add(compra);
     }
 
-    public List<Compra> getHistoricoCompras() {
-        return new ArrayList<>(historicoCompras);
-    }
-
-    public void exibirHistoricoCompras() {
+    public void exibirHistorico() {
+        System.out.println("Histórico de compras de " + nome + ":");
         for (Compra compra : historicoCompras) {
-            System.out.println(compra);
+            compra.exibirItens();
         }
-    }
-
-    public Iterator<Compra> getComprasIterator() {
-        return historicoCompras.iterator();
-    }
-
-    @Override
-    public String toString() {
-        return "Cliente: " + nome + " - Compras: " + historicoCompras.size();
     }
 }

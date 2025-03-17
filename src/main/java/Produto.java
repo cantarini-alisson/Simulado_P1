@@ -1,17 +1,11 @@
 public class Produto {
     private String nome;
-    private double precoUnitario;
+    private double preco;
     private int estoque;
 
-    public Produto(String nome, double precoUnitario, int estoque) {
-        if (precoUnitario <= 0) {
-            throw new IllegalArgumentException("O preço deve ser positivo.");
-        }
-        if (estoque < 0) {
-            throw new IllegalArgumentException("O estoque não pode ser negativo.");
-        }
+    public Produto(String nome, double preco, int estoque) {
         this.nome = nome;
-        this.precoUnitario = precoUnitario;
+        this.preco = preco;
         this.estoque = estoque;
     }
 
@@ -19,8 +13,8 @@ public class Produto {
         return nome;
     }
 
-    public double getPrecoUnitario() {
-        return precoUnitario;
+    public double getPreco() {
+        return preco;
     }
 
     public int getEstoque() {
@@ -28,17 +22,15 @@ public class Produto {
     }
 
     public void reduzirEstoque(int quantidade) {
-        if (quantidade <= 0) {
-            throw new IllegalArgumentException("A quantidade deve ser maior que zero.");
-        }
         if (quantidade > estoque) {
-            throw new IllegalStateException("Quantidade insuficiente em estoque.");
+            System.out.println("Erro: Estoque insuficiente para " + nome);
+        } else {
+            estoque -= quantidade;
         }
-        this.estoque -= quantidade;
     }
 
     @Override
     public String toString() {
-        return nome + " - Preço: R$ " + precoUnitario + " - Estoque: " + estoque;
+        return nome + " - R$ " + preco + " - Estoque: " + estoque;
     }
 }
