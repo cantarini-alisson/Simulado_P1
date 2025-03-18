@@ -1,20 +1,22 @@
 public class Produto {
-    private String nome;
-    private double preco;
+    private String descricao;
+    private double precoUnitario;
     private int estoque;
+    private Categoria categoria;
 
-    public Produto(String nome, double preco, int estoque) {
-        this.nome = nome;
-        this.preco = preco;
+    public Produto(String descricao, double precoUnitario, int estoque, Categoria categoria) {
+        this.descricao = descricao;
+        this.precoUnitario = precoUnitario;
         this.estoque = estoque;
+        this.categoria = categoria;
     }
 
-    public String getNome() {
-        return nome;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public double getPreco() {
-        return preco;
+    public double getPrecoUnitario() {
+        return precoUnitario;
     }
 
     public int getEstoque() {
@@ -23,14 +25,16 @@ public class Produto {
 
     public void reduzirEstoque(int quantidade) {
         if (quantidade > estoque) {
-            System.out.println("Erro: Estoque insuficiente para " + nome);
-        } else {
-            estoque -= quantidade;
+            throw new IllegalArgumentException("Estoque insuficiente para " + descricao);
         }
+        estoque -= quantidade;
     }
 
-    @Override
-    public String toString() {
-        return nome + " - R$ " + preco + " - Estoque: " + estoque;
+    public void aumentarEstoque(int quantidade) {
+        estoque += quantidade;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
     }
 }

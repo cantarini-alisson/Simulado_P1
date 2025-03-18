@@ -1,31 +1,58 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Compra {
+    private String numeroCompra;
+    private LocalDate dataCompra;
+    private double valorTotalCompra;
+    private double valorDesconto;
+    private double valorPagar;
     private List<ItemCompra> itens;
+    private Cliente cliente;
+    private Vendedor vendedor;
 
-    public Compra() {
+    public Compra(String numeroCompra, LocalDate dataCompra, Cliente cliente, Vendedor vendedor) {
+        this.numeroCompra = numeroCompra;
+        this.dataCompra = dataCompra;
+        this.cliente = cliente;
+        this.vendedor = vendedor;
         this.itens = new ArrayList<>();
     }
 
-    public void adicionarItem(Produto produto, int quantidade) {
-        ItemCompra item = new ItemCompra(produto, quantidade);
+    public String getNumeroCompra() {
+        return numeroCompra;
+    }
+
+    public LocalDate getDataCompra() {
+        return dataCompra;
+    }
+
+    public void incluirItemCompra(ItemCompra item) {
         itens.add(item);
+        calcularValorTotalCompra();
     }
 
-    public double getValorTotal() {
-        double total = 0;
-        for (ItemCompra item : itens) {
-            total += item.getValorTotal();
-        }
-        return total;
+    public void removerItemCompra(ItemCompra item) {
+        itens.remove(item);
+        item.getProduto().aumentarEstoque(item.getQuantidadeComprada());
+        calcularValorTotalCompra();
     }
 
-    public void exibirItens() {
-        System.out.println("Itens da compra:");
+    public void calcularValorTotalCompra() {
+        valorTotalCompra = 0;
         for (ItemCompra item : itens) {
-            System.out.println("- " + item);
+            valorTotalCompra += item.getValorTotal();
         }
-        System.out.println("Total da compra: R$ " + getValorTotal());
+        aplicarDesconto();
+    }
+
+    private void aplicarDesconto() {
+        valorDesconto = valorTotalCompra > 500 ? valorTotalCompra * 0.05 : 0;
+        valorPagar = valorTotalCompra - valorDesconto;
+    }
+
+    public double getValorPagar() {
+        return valorPagar;
     }
 }

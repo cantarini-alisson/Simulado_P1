@@ -1,27 +1,35 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Cliente {
+    private String cpf;
     private String nome;
-    private List<Compra> historicoCompras;
+    private List<Compra> compras;
 
-    public Cliente(String nome) {
+    public Cliente(String cpf, String nome) {
+        this.cpf = cpf;
         this.nome = nome;
-        this.historicoCompras = new ArrayList<>();
+        this.compras = new ArrayList<>();
     }
 
-    public String getNome() {
-        return nome;
+    public void incluirCompra(Compra compra) {
+        compras.add(compra);
     }
 
-    public void adicionarCompra(Compra compra) {
-        historicoCompras.add(compra);
+    public void removerCompra(Compra compra) {
+        compras.remove(compra);
     }
 
-    public void exibirHistorico() {
-        System.out.println("Histórico de compras de " + nome + ":");
-        for (Compra compra : historicoCompras) {
-            compra.exibirItens();
+    public void exibirHistoricoCompras(LocalDate dataInicial, LocalDate dataFinal) {
+        Iterator<Compra> iterator = compras.iterator();
+        while (iterator.hasNext()) {
+            Compra compra = iterator.next();
+            LocalDate data = compra.getDataCompra();
+            if (!data.isBefore(dataInicial) && !data.isAfter(dataFinal)) {
+                System.out.println("Compra: " + compra.getNumeroCompra() + " - Valor: " + compra.getValorPagar());
+            }
         }
     }
 }

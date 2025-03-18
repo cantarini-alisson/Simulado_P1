@@ -1,27 +1,32 @@
+import java.time.LocalDate;
+
 public class Main {
     public static void main(String[] args) {
-        Produto panela = new Produto("Panela", 50.0, 10);
-        Produto jogoDeCama = new Produto("Jogo de Cama", 150.0, 5);
-        Produto geladeira = new Produto("Geladeira", 3000.0, 2);
+        try {
+            Categoria eletrodomestico = new Categoria("Eletrodoméstico");
+            Categoria utensilio = new Categoria("Utensílio Doméstico");
 
-        Cliente maria = new Cliente("Maria");
+            Produto panela = new Produto("Panela", 50.00, 10, utensilio);
+            Produto jogoDeCama = new Produto("Jogo de cama", 150.00, 5, utensilio);
+            Produto geladeira = new Produto("Geladeira", 3000.00, 2, eletrodomestico);
 
-        Compra compra1 = new Compra();
-        compra1.adicionarItem(panela, 2);
-        compra1.adicionarItem(jogoDeCama, 1);
+            Cliente maria = new Cliente("12345678900", "Maria");
+            Vendedor joao = new Vendedor("V001", "João");
 
-        maria.adicionarCompra(compra1);
+            Compra compra = new Compra("COMP123", LocalDate.now(), maria, joao);
 
-        Compra compra2 = new Compra();
-        compra2.adicionarItem(geladeira, 1);
+            compra.incluirItemCompra(new ItemCompra(panela, 2));
+            compra.incluirItemCompra(new ItemCompra(jogoDeCama, 1));
+            compra.incluirItemCompra(new ItemCompra(geladeira, 1));
 
-        maria.adicionarCompra(compra2);
+            maria.incluirCompra(compra);
 
-        maria.exibirHistorico();
+            System.out.println("Total a pagar: " + compra.getValorPagar());
+            System.out.println("\nHistórico de Compras do Cliente:");
+            maria.exibirHistoricoCompras(LocalDate.of(2024, 1, 1), LocalDate.now());
 
-        System.out.println("\nEstoque atual:");
-        System.out.println(panela);
-        System.out.println(jogoDeCama);
-        System.out.println(geladeira);
+        } catch (Exception e) {
+            System.out.println("Erro: " + e.getMessage());
+        }
     }
 }
