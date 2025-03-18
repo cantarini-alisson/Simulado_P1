@@ -1,20 +1,24 @@
-
 public class ItemCompra {
     private Produto produto;
     private int quantidade;
+    private double valorTotal;
 
     public ItemCompra(Produto produto, int quantidade) {
         this.produto = produto;
         this.quantidade = quantidade;
+        calcularValorTotal();
         produto.reduzirEstoque(quantidade);
     }
 
-    public double getValorTotal() {
-        return produto.getPreco() * quantidade;
+    private void calcularValorTotal() {
+        this.valorTotal = produto.getPrecoUnitario() * quantidade;
     }
 
-    @Override
-    public String toString() {
-        return produto.getNome() + " - Quantidade: " + quantidade + " - Total: R$ " + getValorTotal();
+    public double getValorTotal() {
+        return valorTotal;
+    }
+
+    public Produto getProduto() {
+        return produto;
     }
 }

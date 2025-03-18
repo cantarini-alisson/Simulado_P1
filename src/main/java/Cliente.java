@@ -10,18 +10,13 @@ public class Cliente {
         this.historicoCompras = new ArrayList<>();
     }
 
-    public String getNome() {
-        return nome;
-    }
-
-    public void adicionarCompra(Compra compra) {
+    public void realizarCompra(Compra compra) {
         historicoCompras.add(compra);
     }
 
-    public void exibirHistorico() {
-        System.out.println("Histórico de compras de " + nome + ":");
+    public void exibirHistoricoCompras() {
         for (Compra compra : historicoCompras) {
-            compra.exibirItens();
+            System.out.println("Compra realizada por " + nome + " com valor total: " + compra.getValorPagar());
         }
     }
 }
