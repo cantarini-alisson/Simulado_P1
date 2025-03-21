@@ -20,7 +20,7 @@ public class Main {
             System.out.println("Total a pagar: " + compra.getValorPagar());
             maria.exibirHistoricoCompras();
             compra.listarItens();
-        } catch (Exception e) {
+        } catch (IllegalArgumentException | IllegalStateException e) {
             System.out.println("Erro: " + e.getMessage());
         }
     }
