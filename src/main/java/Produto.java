@@ -33,4 +33,8 @@ public class Produto {
         }
         this.estoque -= quantidade;
     }
+
+    public void exibirEstoque() {
+        System.out.println(nome + " - Estoque disponível: " + estoque);
+    }
 }
