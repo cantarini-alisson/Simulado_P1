@@ -16,18 +16,18 @@ public class Main {
             Compra compra = new Compra(maria, joao, LocalDate.now());
             compra.adicionarItem(panela, 2);
             compra.adicionarItem(jogoDeCama, 1);
-            compra.adicionarItem(geladeira, 5);
+            compra.adicionarItem(geladeira, 1);
             maria.realizarCompra(compra);
 
-            System.out.println("\n===== Detalhes da Compra =====");
+            System.out.println("\n========== Detalhes da Compra ==========");
             System.out.println("Número da Compra: " + compra.getId());
             System.out.println("Data da Compra: " + compra.getData());
             System.out.println("Cliente: " + maria.getNome());
             System.out.println("Vendedor: " + joao.getNome());
             compra.listarItens();
-            System.out.println("Valor Total da Compra: R$" + compra.getValorPagar());
+            System.out.println("VALOR TOTAL DA COMPRA: R$" + compra.getValorPagar());
 
-            System.out.println("\n===== Estoque Atualizado =====");
+            System.out.println("\n========== Estoque Atualizado ==========");
             panela.exibirEstoque();
             jogoDeCama.exibirEstoque();
             geladeira.exibirEstoque();
