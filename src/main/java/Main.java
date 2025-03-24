@@ -13,7 +13,7 @@ public class Main {
 
             Cliente maria = new Cliente("Maria");
             Vendedor joao = new Vendedor("João");
-            Compra compra = new Compra(maria, joao);
+            Compra compra = new Compra(joao);
 
             compra.adicionarItem(panela, 2);
             compra.adicionarItem(jogoDeCama, 1);
@@ -24,6 +24,8 @@ public class Main {
 
             LocalDateTime dataCompra = LocalDateTime.now();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+            System.out.println();
+            System.out.println("**********************************************************");
             System.out.println("Data da compra: " + dataCompra.format(formatter));
             System.out.println("Cliente: " + maria.getNome());
             System.out.println("Vendedor: " + joao.getNome());
