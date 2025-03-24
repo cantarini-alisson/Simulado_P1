@@ -1,4 +1,5 @@
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Main {
     public static void main(String[] args) {
@@ -7,30 +8,36 @@ public class Main {
             Categoria eletrodomesticos = new Categoria("Eletrodomésticos");
 
             Produto panela = new Produto("Panela", 50.00, 10, cozinha);
-            Produto jogoDeCama = new Produto("Jogo de Cama", 150.00, 5, cozinha);
+            Produto jogoDeCama = new Produto("Jogo de cama", 150.00, 5, cozinha);
             Produto geladeira = new Produto("Geladeira (110v)", 3000.00, 2, eletrodomesticos);
 
             Cliente maria = new Cliente("Maria");
             Vendedor joao = new Vendedor("João");
+            Compra compra = new Compra(maria, joao);
 
-            Compra compra = new Compra(maria, joao, LocalDate.now());
             compra.adicionarItem(panela, 2);
             compra.adicionarItem(jogoDeCama, 1);
             compra.adicionarItem(geladeira, 1);
             maria.realizarCompra(compra);
 
-            System.out.println("\n========== Detalhes da Compra ==========");
-            System.out.println("Número da Compra: " + compra.getId());
-            System.out.println("Data da Compra: " + compra.getData());
+            maria.exibirHistoricoCompras();
+
+            LocalDateTime dataCompra = LocalDateTime.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+            System.out.println("Data da compra: " + dataCompra.format(formatter));
             System.out.println("Cliente: " + maria.getNome());
             System.out.println("Vendedor: " + joao.getNome());
-            compra.listarItens();
-            System.out.println("VALOR TOTAL DA COMPRA: R$" + compra.getValorPagar());
 
-            System.out.println("\n========== Estoque Atualizado ==========");
-            panela.exibirEstoque();
-            jogoDeCama.exibirEstoque();
-            geladeira.exibirEstoque();
+            System.out.println("\nItens Comprados:");
+            compra.listarItens();
+            System.out.println("\nTotal da compra: R$" + compra.getValorTotalCompra());
+            System.out.println("Desconto aplicado: R$" + compra.getValorDesconto());
+            System.out.println("Valor final a pagar: R$" + compra.getValorPagar());
+
+            System.out.println("\nEstoque atualizado após a compra:");
+            System.out.println(panela.getNome() + " - Estoque: " + panela.getEstoque());
+            System.out.println(jogoDeCama.getNome() + " - Estoque: " + jogoDeCama.getEstoque());
+            System.out.println(geladeira.getNome() + " - Estoque: " + geladeira.getEstoque());
 
         } catch (IllegalArgumentException | IllegalStateException e) {
             System.out.println("Erro: " + e.getMessage());

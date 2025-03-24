@@ -1,4 +1,4 @@
-public class Categoria {
+class Categoria {
     private String nome;
 
     public Categoria(String nome) {

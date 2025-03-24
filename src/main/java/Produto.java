@@ -1,4 +1,4 @@
-public class Produto {
+class Produto {
     private String nome;
     private double precoUnitario;
     private int estoque;
@@ -32,9 +32,5 @@ public class Produto {
             throw new IllegalArgumentException("Quantidade insuficiente em estoque.");
         }
         this.estoque -= quantidade;
-    }
-
-    public void exibirEstoque() {
-        System.out.println(nome + " - Estoque disponível: " + estoque);
     }
 }

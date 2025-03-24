@@ -1,4 +1,4 @@
-public class Vendedor {
+class Vendedor {
     private String nome;
 
     public Vendedor(String nome) {
