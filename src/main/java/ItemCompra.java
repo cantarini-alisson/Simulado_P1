@@ -22,7 +22,4 @@ class ItemCompra {
         return produto;
     }
 
-    public int getQuantidade() {
-        return quantidade;
-    }
 }
