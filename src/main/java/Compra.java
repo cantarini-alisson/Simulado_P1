@@ -6,9 +6,11 @@ class Compra {
     private double valorTotalCompra;
     private double valorDesconto;
     private double valorPagar;
+    private Vendedor vendedor;
 
     public Compra(Vendedor vendedor) {
         this.itens = new HashSet<>();
+        this.vendedor = vendedor;
     }
 
     public void adicionarItem(Produto produto, int quantidade) {
@@ -53,5 +55,9 @@ class Compra {
 
     public double getValorDesconto() {
         return valorDesconto;
+    }
+
+    public Vendedor getVendedor() {
+        return vendedor;
     }
 }
