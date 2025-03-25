@@ -25,7 +25,7 @@ public class Main {
             LocalDateTime dataCompra = LocalDateTime.now();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
             System.out.println();
-            System.out.println("**********************************************************");
+            System.out.println("*******************************************************************");
             System.out.println("Data da compra: " + dataCompra.format(formatter));
             System.out.println("Cliente: " + maria.getNome());
             System.out.println("Vendedor: " + joao.getNome());
