@@ -4,29 +4,28 @@ public class ItemCompra {
     private double valorTotal;
 
     public ItemCompra(Produto produto, int quantidadeComprada) {
-        if (quantidadeComprada <= 0) {
-            throw new IllegalArgumentException("Quantidade deve ser maior que zero.");
+        if (produto == null || quantidadeComprada <= 0) {
+            throw new IllegalArgumentException("Produto inválido ou quantidade deve ser maior que zero.");
         }
-
-        produto.reduzirEstoque(quantidadeComprada);
         this.produto = produto;
         this.quantidadeComprada = quantidadeComprada;
         calcularValorTotal();
+        produto.reduzirEstoque(quantidadeComprada);
     }
 
     private void calcularValorTotal() {
-        this.valorTotal = quantidadeComprada * produto.getPrecoUnitario();
+        this.valorTotal = produto.getPrecoUnitario() * quantidadeComprada;
     }
 
     public double getValorTotal() {
         return valorTotal;
     }
 
-    public Produto getProduto() {
-        return produto;
-    }
-
     public int getQuantidadeComprada() {
         return quantidadeComprada;
+    }
+
+    public Produto getProduto() {
+        return produto;
     }
 }

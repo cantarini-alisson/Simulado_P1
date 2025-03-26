@@ -3,29 +3,46 @@ import java.time.LocalDate;
 public class Main {
     public static void main(String[] args) {
         try {
-            Categoria eletrodomestico = new Categoria("Eletrodoméstico");
-            Categoria utensilio = new Categoria("Utensílio Doméstico");
+            // Criando categorias
+            Categoria eletronico = new Categoria("Eletrônico");
+            Categoria vestuario = new Categoria("Vestuário");
 
-            Produto panela = new Produto("Panela", 50.00, 10, utensilio);
-            Produto jogoDeCama = new Produto("Jogo de cama", 150.00, 5, utensilio);
-            Produto geladeira = new Produto("Geladeira", 3000.00, 2, eletrodomestico);
+            // Criando produtos
+            Produto celular = new Produto("Smartphone", 1500.00, 10, eletronico);
+            Produto laptop = new Produto("Notebook", 3000.00, 5, eletronico);
+            Produto camiseta = new Produto("Camiseta Polo", 50.00, 20, vestuario);
 
-            Cliente maria = new Cliente("12345678900", "Maria");
-            Vendedor joao = new Vendedor("V001", "João");
+            // Criando vendedores
+            Vendedor vendedor1 = new Vendedor("12345", "Carlos Silva");
+            Vendedor vendedor2 = new Vendedor("67890", "Mariana Costa");
 
-            Compra compra = new Compra("COMP123", LocalDate.now(), maria, joao);
+            // Criando clientes
+            Cliente cliente1 = new Cliente("111.222.333-44", "Ana Souza");
+            Cliente cliente2 = new Cliente("555.666.777-88", "Lucas Oliveira");
 
-            compra.incluirItemCompra(new ItemCompra(panela, 2));
-            compra.incluirItemCompra(new ItemCompra(jogoDeCama, 1));
-            compra.incluirItemCompra(new ItemCompra(geladeira, 1));
+            // Criando compras
+            Compra compra1 = new Compra("0001", cliente1, vendedor1, LocalDate.of(2024, 3, 10));
+            ItemCompra item1 = new ItemCompra(celular, 1);
+            ItemCompra item2 = new ItemCompra(camiseta, 2);
+            compra1.incluirItemCompra(item1);
+            compra1.incluirItemCompra(item2);
 
-            maria.incluirCompra(compra);
+            Compra compra2 = new Compra("0002", cliente2, vendedor2, LocalDate.of(2024, 3, 12));
+            ItemCompra item3 = new ItemCompra(laptop, 1);
+            ItemCompra item4 = new ItemCompra(celular, 1);
+            compra2.incluirItemCompra(item3);
+            compra2.incluirItemCompra(item4);
 
-            System.out.println("Total a pagar: " + compra.getValorPagar());
-            System.out.println("\nHistórico de Compras do Cliente:");
-            maria.exibirHistoricoCompras(LocalDate.of(2024, 1, 1), LocalDate.now());
+            // Associando compras aos clientes
+            cliente1.incluirCompra(compra1);
+            cliente2.incluirCompra(compra2);
 
-        } catch (Exception e) {
+            // Exibindo histórico de compras
+            System.out.println("\n=== Histórico de Compras ===");
+            compra1.exibirDetalhesCompra();
+            compra2.exibirDetalhesCompra();
+
+        } catch (IllegalArgumentException e) {
             System.out.println("Erro: " + e.getMessage());
         }
     }

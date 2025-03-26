@@ -3,21 +3,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Compra {
-    private String numeroCompra;
-    private LocalDate dataCompra;
+    private final String numeroCompra;
+    private final LocalDate dataCompra;
     private double valorTotalCompra;
-    private double valorDesconto;
-    private double valorPagar;
     private List<ItemCompra> itens;
     private Cliente cliente;
     private Vendedor vendedor;
 
-    public Compra(String numeroCompra, LocalDate dataCompra, Cliente cliente, Vendedor vendedor) {
+    public Compra(String numeroCompra, Cliente cliente, Vendedor vendedor, LocalDate localDate) {
+        if (numeroCompra == null || cliente == null || vendedor == null) {
+            throw new IllegalArgumentException("Dados inválidos para a compra.");
+        }
         this.numeroCompra = numeroCompra;
-        this.dataCompra = dataCompra;
+        this.dataCompra = LocalDate.now();
+        this.itens = new ArrayList<>();
         this.cliente = cliente;
         this.vendedor = vendedor;
-        this.itens = new ArrayList<>();
+    }
+
+    public void incluirItemCompra(ItemCompra itemCompra) {
+        if (itemCompra == null) {
+            throw new IllegalArgumentException("O item da compra não pode ser nulo.");
+        }
+        itens.add(itemCompra);
+        calcularValorTotalCompra();
+    }
+
+    private void calcularValorTotalCompra() {
+        valorTotalCompra = itens.stream().mapToDouble(ItemCompra::getValorTotal).sum();
     }
 
     public String getNumeroCompra() {
@@ -28,31 +41,21 @@ public class Compra {
         return dataCompra;
     }
 
-    public void incluirItemCompra(ItemCompra item) {
-        itens.add(item);
-        calcularValorTotalCompra();
-    }
-
-    public void removerItemCompra(ItemCompra item) {
-        itens.remove(item);
-        item.getProduto().aumentarEstoque(item.getQuantidadeComprada());
-        calcularValorTotalCompra();
-    }
-
-    public void calcularValorTotalCompra() {
-        valorTotalCompra = 0;
-        for (ItemCompra item : itens) {
-            valorTotalCompra += item.getValorTotal();
-        }
-        aplicarDesconto();
-    }
-
-    private void aplicarDesconto() {
-        valorDesconto = valorTotalCompra > 500 ? valorTotalCompra * 0.05 : 0;
-        valorPagar = valorTotalCompra - valorDesconto;
-    }
-
     public double getValorPagar() {
-        return valorPagar;
+        return valorTotalCompra;
+    }
+
+    public void exibirDetalhesCompra() {
+        System.out.println("Compra nº " + numeroCompra + " | Data: " + dataCompra);
+        System.out.println("Vendedor: " + vendedor.getNome());
+        System.out.println("Itens da compra:");
+        for (ItemCompra item : itens) {
+            System.out.println(" - " + item.getQuantidadeComprada() +
+                                 " " + item.getProduto().getDescricao() +
+                                " (R$ " + item.getProduto().getPrecoUnitario() +
+                                " cada) -> Total: R$ " + item.getValorTotal());
+        }
+        System.out.println("Total a pagar: R$ " + valorTotalCompra);
+        System.out.println("---------------------------------------------------");
     }
 }
