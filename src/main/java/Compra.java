@@ -3,8 +3,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Compra {
-    private String numeroCompra;
-    private LocalDate dataCompra;
+    private final String numeroCompra;
+    private final LocalDate dataCompra;
     private double valorTotalCompra;
     private List<ItemCompra> itens;
     private Cliente cliente;
