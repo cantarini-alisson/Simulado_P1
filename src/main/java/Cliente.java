@@ -23,7 +23,9 @@ public class Cliente {
     }
 
     public void exibirHistoricoCompras() {
+        System.out.println();
         System.out.println("Histórico de compras de " + nome + " (CPF: " + cpf + ")");
+        System.out.println();
         System.out.println("===================================================");
         for (Compra compra : historicoCompras) {
             compra.exibirDetalhesCompra();
