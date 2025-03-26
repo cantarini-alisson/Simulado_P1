@@ -9,7 +9,7 @@ public class Cliente {
 
     public Cliente(String cpf, String nome) {
         if (cpf == null || cpf.trim().isEmpty() || nome == null || nome.trim().isEmpty()) {
-            throw new IllegalArgumentException("Dados inválidos para o cliente.");
+            throw new IllegalArgumentException("Dados inválidos para o clientes.");
         }
         this.cpf = cpf;
         this.nome = nome;

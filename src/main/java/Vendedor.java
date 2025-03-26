@@ -4,7 +4,7 @@ public class Vendedor {
 
     public Vendedor(String matricula, String nome) {
         if (matricula == null || matricula.trim().isEmpty() || nome == null || nome.trim().isEmpty()) {
-            throw new IllegalArgumentException("Dados inválidos para o vendedor.");
+            throw new IllegalArgumentException("Dados inválidos para o vendedo.");
         }
         this.matricula = matricula;
         this.nome = nome;

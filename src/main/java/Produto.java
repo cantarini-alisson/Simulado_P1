@@ -6,7 +6,7 @@ public class Produto {
 
     public Produto(String descricao, double precoUnitario, int estoque, Categoria categoria) {
         if (descricao == null || descricao.trim().isEmpty() || precoUnitario <= 0 || estoque < 0 || categoria == null) {
-            throw new IllegalArgumentException("Dados inválidos para o produto.");
+            throw new IllegalArgumentException("Dados inválidos para o produtos.");
         }
         this.descricao = descricao;
         this.precoUnitario = precoUnitario;

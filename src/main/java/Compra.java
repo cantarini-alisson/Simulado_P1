@@ -12,7 +12,7 @@ public class Compra {
 
     public Compra(String numeroCompra, Cliente cliente, Vendedor vendedor, LocalDate localDate) {
         if (numeroCompra == null || cliente == null || vendedor == null) {
-            throw new IllegalArgumentException("Dados inválidos para a compra.");
+            throw new IllegalArgumentException("Dados inválidos para a compras.");
         }
         this.numeroCompra = numeroCompra;
         this.dataCompra = LocalDate.now();

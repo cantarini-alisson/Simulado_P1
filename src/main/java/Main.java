@@ -13,7 +13,7 @@ public class Main {
             Produto camiseta = new Produto("Camiseta Polo", 50.00, 20, vestuario);
 
             // Criando vendedores
-            Vendedor vendedor1 = new Vendedor("12345", "Carlos Silva");
+            Vendedor vendedor1 = new Vendedor("12346", "Carlos Silva");
             Vendedor vendedor2 = new Vendedor("67890", "Mariana Costa");
 
             // Criando clientes
