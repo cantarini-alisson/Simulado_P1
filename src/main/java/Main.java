@@ -1,47 +1,41 @@
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 public class Main {
     public static void main(String[] args) {
         try {
-            Categoria cozinha = new Categoria("Cozinha");
-            Categoria eletrodomesticos = new Categoria("Eletrodomésticos");
+            // Criando categorias
+            Categoria eletronico = new Categoria("Eletrônico");
+            Categoria vestuario = new Categoria("Vestuário");
 
-            Produto panela = new Produto("Panela", 50.00, 10, cozinha);
-            Produto jogoDeCama = new Produto("Jogo de cama", 150.00, 5, cozinha);
-            Produto geladeira = new Produto("Geladeira (110v)", 3000.00, 2, eletrodomesticos);
+            // Criando produtos
+            Produto celular = new Produto("Smartphone", 1500.00, 10, eletronico);
+            Produto laptop = new Produto("Notebook", 3000.00, 5, eletronico);
+            Produto camiseta = new Produto("Camiseta Polo", 50.00, 20, vestuario);
 
-            Cliente maria = new Cliente("Maria");
-            Vendedor joao = new Vendedor("João");
-            Compra compra = new Compra(joao);
+            // Criando vendedores
+            Vendedor vendedor1 = new Vendedor("12345", "Carlos Silva");
+            Vendedor vendedor2 = new Vendedor("67890", "Mariana Costa");
 
-            compra.adicionarItem(panela, 2);
-            compra.adicionarItem(jogoDeCama, 1);
-            compra.adicionarItem(geladeira, 1);
-            maria.realizarCompra(compra);
+            // Criando clientes
+            Cliente cliente1 = new Cliente("111.222.333-44", "Ana Souza");
+            Cliente cliente2 = new Cliente("555.666.777-88", "Lucas Oliveira");
 
-            maria.exibirHistoricoCompras();
+            // Criando compras
+            Compra compra1 = new Compra("0001", cliente1, vendedor1);
+            compra1.incluirItemCompra(new ItemCompra(celular, 1));
+            compra1.incluirItemCompra(new ItemCompra(camiseta, 2));
 
-            LocalDateTime dataCompra = LocalDateTime.now();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-            System.out.println();
-            System.out.println("*******************************************************************");
-            System.out.println("Data da compra: " + dataCompra.format(formatter));
-            System.out.println("Cliente: " + maria.getNome());
-            System.out.println("Vendedor: " + joao.getNome());
+            Compra compra2 = new Compra("0002", cliente2, vendedor2);
+            compra2.incluirItemCompra(new ItemCompra(laptop, 1));
+            compra2.incluirItemCompra(new ItemCompra(celular, 1));
 
-            System.out.println("\nItens Comprados:");
-            compra.listarItens();
-            System.out.println("\nTotal da compra: R$" + compra.getValorTotalCompra());
-            System.out.println("Desconto aplicado: R$" + compra.getValorDesconto());
-            System.out.println("Valor final a pagar: R$" + compra.getValorPagar());
+            // Associando compras aos clientes
+            cliente1.incluirCompra(compra1);
+            cliente2.incluirCompra(compra2);
 
-            System.out.println("\nEstoque atualizado após a compra:");
-            System.out.println(panela.getNome() + " - Estoque: " + panela.getEstoque());
-            System.out.println(jogoDeCama.getNome() + " - Estoque: " + jogoDeCama.getEstoque());
-            System.out.println(geladeira.getNome() + " - Estoque: " + geladeira.getEstoque());
+            // Exibindo histórico de compras com detalhes
+            cliente1.exibirHistoricoCompras();
+            cliente2.exibirHistoricoCompras();
 
-        } catch (IllegalArgumentException | IllegalStateException e) {
+        } catch (IllegalArgumentException e) {
             System.out.println("Erro: " + e.getMessage());
         }
     }

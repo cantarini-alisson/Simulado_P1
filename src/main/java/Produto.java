@@ -1,18 +1,21 @@
-class Produto {
-    private String nome;
+public class Produto {
+    private String descricao;
     private double precoUnitario;
     private int estoque;
     private Categoria categoria;
 
-    public Produto(String nome, double precoUnitario, int estoque, Categoria categoria) {
-        this.nome = nome;
+    public Produto(String descricao, double precoUnitario, int estoque, Categoria categoria) {
+        if (descricao == null || descricao.trim().isEmpty() || precoUnitario <= 0 || estoque < 0 || categoria == null) {
+            throw new IllegalArgumentException("Dados inválidos para o produto.");
+        }
+        this.descricao = descricao;
         this.precoUnitario = precoUnitario;
         this.estoque = estoque;
         this.categoria = categoria;
     }
 
-    public String getNome() {
-        return nome;
+    public String getDescricao() {
+        return descricao;
     }
 
     public double getPrecoUnitario() {
@@ -28,8 +31,8 @@ class Produto {
     }
 
     public void reduzirEstoque(int quantidade) {
-        if (quantidade > estoque) {
-            throw new IllegalArgumentException("Quantidade insuficiente em estoque.");
+        if (quantidade <= 0 || quantidade > estoque) {
+            throw new IllegalArgumentException("Quantidade inválida ou estoque insuficiente.");
         }
         this.estoque -= quantidade;
     }
