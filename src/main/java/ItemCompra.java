@@ -5,7 +5,7 @@ public class ItemCompra {
 
     public ItemCompra(Produto produto, int quantidadeComprada) {
         if (produto == null || quantidadeComprada <= 0) {
-            throw new IllegalArgumentException("Produto inválido ou quantidade deve ser maior que zero.");
+            throw new IllegalArgumentException("Produto inválido ou quantidade insuficiente.");
         }
         this.produto = produto;
         this.quantidadeComprada = quantidadeComprada;
